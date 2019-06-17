@@ -6,6 +6,7 @@
 package admTK;
 
 
+import static admTK.pendataansiswa.cari_nama;
 import static admTK.pendataansiswa.tblTK;
 import static admTK.pendataansiswa.tgl;
 import java.awt.event.KeyEvent;
@@ -17,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +37,23 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     public administrasiPendaftaranSiswa() {
         koneksi=new koneksi();
         initComponents();
+        datatable("");
+        cari_nis.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                datatable(cari_nis.getText());
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                datatable(cari_nis.getText());
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not Supported yet.");//to change body og generated methods. choose tools |templates.
+            }
+        });
+        
+        
         simpan.setEnabled(false);
         ttotal.setEditable(false);
         status.setEditable(false);
@@ -131,6 +151,56 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         }
        }
 
+    
+    public void datatable(String cari_nis){
+         DefaultTableModel tbl = new DefaultTableModel();
+         tbl.addColumn("NIS");
+         tbl.addColumn("Tanggal");
+         tbl.addColumn("Keterangan");
+         tbl.addColumn("Jumlah");
+         tbl.addColumn("Total");
+         tbl.addColumn("Status");
+  
+         if (cari_nis.equals("")){
+             try{
+                 Statement st =(Statement)koneksi.con.createStatement();
+                 ResultSet res=st.executeQuery("select nis,tanggal,keterangan,jumlah,total,status from pendaftaran");
+                 while (res.next()){
+                     tbl.addRow(new Object[]{ 
+                      
+                         res.getString("nis"),
+                         res.getString("tanggal"),
+                         res.getString("keterangan"),
+                         res.getString("jumlah"),
+                         res.getString("total"),
+                         res.getString("status"),
+                         
+                     });
+                 }
+             }catch (Exception e) {
+                 
+             }
+         }else{
+             try{
+                 Statement st = (Statement)koneksi.con.createStatement();
+                 ResultSet res = st.executeQuery("select nis,tanggal,keterangan,jumlah,total,status from pendaftaran where nis Like '%"+cari_nis+"%'");
+                 
+                 while(res.next()){
+                     tbl.addRow(new Object[]{
+                         res.getString("nis"),
+                         res.getString("tanggal"),
+                         res.getString("keterangan"),
+                         res.getString("jumlah"),
+                         res.getString("total"),
+                         res.getString("status"),
+                     });
+                 }
+             }catch (Exception e){
+                 
+             }
+         }
+         tblpendaftaran.setModel(tbl);
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,8 +219,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         jmlhpendaftaran = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        txtcari = new javax.swing.JTextField();
-        cari = new javax.swing.JButton();
+        cari_nis = new javax.swing.JTextField();
         simpan = new javax.swing.JButton();
         ttotal = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -204,15 +273,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 249, 160));
-        getContentPane().add(txtcari, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 230, 31));
-
-        cari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
-        cari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cariActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, 34));
+        getContentPane().add(cari_nis, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 230, 31));
 
         simpan.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         simpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save-icon-55391.png"))); // NOI18N
@@ -364,11 +425,6 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_cariActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -407,7 +463,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton cari;
+    private javax.swing.JTextField cari_nis;
     private javax.swing.JComboBox<String> cicilan;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -427,11 +483,10 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jmlhpendaftaran;
-    private javax.swing.JTextField nis;
+    public static javax.swing.JTextField nis;
     private javax.swing.JButton simpan;
     private javax.swing.JTextField status;
     public static javax.swing.JTable tblpendaftaran;
     private javax.swing.JTextField ttotal;
-    private javax.swing.JTextField txtcari;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +36,23 @@ public class alatdanseragam extends javax.swing.JFrame {
     public alatdanseragam() {
         koneksi=new koneksi();
         initComponents();
+        
+        datatable("");
+        cari_nis.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                datatable(cari_nis.getText());
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                datatable(cari_nis.getText());
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not Supported yet.");//to change body og generated methods. choose tools |templates.
+            }
+        });
+        
         output();
         icon(); 
         ttotal.setEditable(false);
@@ -133,6 +152,59 @@ public class alatdanseragam extends javax.swing.JFrame {
         }
        }
     
+    public void datatable(String cari_nis){
+         DefaultTableModel tbl = new DefaultTableModel();
+         tbl.addColumn("NIS");
+         tbl.addColumn("Jenis");
+         tbl.addColumn("Tanggal");
+         tbl.addColumn("Keterangan");
+         tbl.addColumn("Jumlah");
+         tbl.addColumn("Total");
+         tbl.addColumn("Status");
+  
+         if (cari_nis.equals("")){
+             try{
+                 Statement st =(Statement)koneksi.con.createStatement();
+                 ResultSet res=st.executeQuery("select nis,jenis,tanggal,keterangan,jumlah,total,status from alatdanseragam");
+                 while (res.next()){
+                     tbl.addRow(new Object[]{ 
+                      
+                         res.getString("nis"),
+                         res.getString("jenis"),
+                         res.getString("tanggal"),
+                         res.getString("keterangan"),
+                         res.getString("jumlah"),
+                         res.getString("total"),
+                         res.getString("status"),
+                         
+                     });
+                 }
+             }catch (Exception e) {
+                 
+             }
+         }else{
+             try{
+                 Statement st = (Statement)koneksi.con.createStatement();
+                 ResultSet res = st.executeQuery("select nis,jenis,tanggal,keterangan,jumlah,total,status from alatdanseragam where nis Like '%"+cari_nis+"%'");
+                 
+                 while(res.next()){
+                     tbl.addRow(new Object[]{
+                         res.getString("nis"),
+                         res.getString("jenis"),
+                         res.getString("tanggal"),
+                         res.getString("keterangan"),
+                         res.getString("jumlah"),
+                         res.getString("total"),
+                         res.getString("status"),
+                     });
+                 }
+             }catch (Exception e){
+                 
+             }
+         }
+         tblalatseragam.setModel(tbl);
+     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,8 +224,7 @@ public class alatdanseragam extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblalatseragam = new javax.swing.JTable();
-        jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        cari_nis = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cbalatseragam = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
@@ -224,10 +295,7 @@ public class alatdanseragam extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblalatseragam);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 481, 610, 106));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 450, 150, -1));
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 450, -1, -1));
+        getContentPane().add(cari_nis, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 450, 150, -1));
 
         jLabel7.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel7.setText("Jumlah");
@@ -397,10 +465,10 @@ public class alatdanseragam extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cari_nis;
     private javax.swing.JComboBox<String> cbalatseragam;
     private javax.swing.JComboBox<String> cbsemester;
     private javax.swing.JButton jButton1;
-    public static javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -419,7 +487,6 @@ public class alatdanseragam extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jumlah;
     private javax.swing.JTextField nisalat;
     private javax.swing.JButton simpan;

@@ -56,7 +56,7 @@ public class pendataansiswa extends javax.swing.JFrame {
                 throw new UnsupportedOperationException("Not Supported yet.");//to change body og generated methods. choose tools |templates.
             }
         });
-            cari_nama.setEnabled(false);
+           // nama.setEnabled(false);
                   
         output();
         icon();  
@@ -120,7 +120,7 @@ public class pendataansiswa extends javax.swing.JFrame {
                     st = koneksi.con.createStatement();
                     
                     String sql = "INSERT INTO datasiswa (nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima) values ('"+idsiswa.getText()+"',"
-                            + "'"+cari_nama.getText()+"',"
+                            + "'"+nama.getText()+"',"
                             + "'"+txthp.getText()+"',"
                             + "'"+cbjk.getSelectedItem()+"',"
                             + "'"+txttempat.getText()+"',"
@@ -143,8 +143,8 @@ public class pendataansiswa extends javax.swing.JFrame {
       private void update(){
         try{
             String sql = "update datasiswa set "
-                    + "nis ='"+idsiswa.getText()+"'"
-                    + "nama='"+cari_nama.getText()+"'"
+                    + "nis=' " +idsiswa.getText()+"'"
+                    + "nama='"+nama.getText()+"'"
                     + "no_hp='"+txthp.getText()+"'"
                     + "jns_kel='"+cbjk.getSelectedItem()+"'"
                     + "tmptlahir='"+txttempat.getText()+"'"
@@ -162,7 +162,7 @@ public class pendataansiswa extends javax.swing.JFrame {
            // reset();
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null," Data Gagal Diubah "+e);
         }
     }
      
@@ -180,7 +180,7 @@ public class pendataansiswa extends javax.swing.JFrame {
     }
      private void reset(){
         idsiswa.setText("");
-        cari_nama.setText("");
+        nama.setText("");
         txthp.setText("");
         cbjk.setSelectedItem("");
         txttempat.setText("");
@@ -233,7 +233,7 @@ public class pendataansiswa extends javax.swing.JFrame {
          }else{
              try{
                  Statement st = (Statement)koneksi.con.createStatement();
-                 ResultSet res = st.executeQuery("select id_siswa,nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima from datasiswa where nama Like '%"+cari_nama+"%");
+                 ResultSet res = st.executeQuery("select id_siswa,nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima from datasiswa where nama Like '%"+cari_nama+"%'");
                  
                  while(res.next()){
                      tbl.addRow(new Object[]{
@@ -273,7 +273,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         idsiswa = new javax.swing.JTextField();
-        cari_nama = new javax.swing.JTextField();
+        nama = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -287,7 +287,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtalamat = new javax.swing.JTextArea();
         cbjk = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        cari_nama = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -326,7 +326,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         jLabel4.setText("Nama");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
         jPanel1.add(idsiswa, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 90, 200, 28));
-        jPanel1.add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 200, 25));
+        jPanel1.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 200, 25));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Simplified Arabic Fixed", 1, 18)); // NOI18N
@@ -387,7 +387,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         cbjk.setFont(new java.awt.Font("Tekton Pro Ext", 1, 14)); // NOI18N
         cbjk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L", "P" }));
         jPanel1.add(cbjk, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 258, 25));
+        jPanel1.add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 258, 25));
 
         jLabel11.setFont(new java.awt.Font("Simplified Arabic Fixed", 1, 18)); // NOI18N
         jLabel11.setText("Tgl Lahir");
@@ -594,7 +594,7 @@ public class pendataansiswa extends javax.swing.JFrame {
             rs = st.executeQuery(sql);
             rs.next();
             idsiswa.setText(rs.getString(2));
-            cari_nama.setText(rs.getString(3));
+            nama.setText(rs.getString(3));
             txthp.setText(rs.getString(4));
             cbjk.setSelectedItem(rs.getString(5));
             txttempat.setText(rs.getString(6));
@@ -683,7 +683,7 @@ public class pendataansiswa extends javax.swing.JFrame {
     public static javax.swing.JButton btnhapus;
     private javax.swing.JButton btnhome;
     public static javax.swing.JButton btnsave;
-    private javax.swing.JTextField cari_nama;
+    public static javax.swing.JTextField cari_nama;
     private javax.swing.JComboBox<String> cbjk;
     private javax.swing.JComboBox<String> cbterima;
     private javax.swing.JTextField idsiswa;
@@ -709,7 +709,7 @@ public class pendataansiswa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField nama;
     private javax.swing.JTextField nmortu;
     private javax.swing.JTextField portu;
     private javax.swing.JButton tambah;

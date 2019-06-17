@@ -21,6 +21,8 @@ import net.sf.jasperreports.view.JasperViewer;
 import java.util.*;
 import java.io.*;
 import java.sql.SQLException;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 
@@ -40,6 +42,23 @@ public class data_spp1 extends javax.swing.JFrame {
     public data_spp1() {
         koneksi = new koneksi();
         initComponents();
+        
+        datatable("");
+        cari_nis.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                datatable(cari_nis.getText());
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                datatable(cari_nis.getText());
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not Supported yet.");//to change body og generated methods. choose tools |templates.
+            }
+        });
+        
         output();
     }
     
@@ -59,9 +78,9 @@ public class data_spp1 extends javax.swing.JFrame {
         }
     }
  protected void output(){
-Object header[] ={"No","NIS","Jumlah","Tanggal","Keterangan","Status"};
+Object header[] ={"No","NIS","Jumlah","Tanggal","Keterangan","Total","Status"};
 tabmode = new DefaultTableModel(null, header);
-String cariitem=txtcari.getText();
+//String cariitem=cari_nis.getText();
 try {
 String sql = "SELECT * FROM spp "; 
         //+ id_pembayaran "like '%"+cariitem+"%' or nis like '%"+cariitem+"%' order by id_pembayaran asc";
@@ -84,7 +103,56 @@ tblsppp.setModel(tabmode);
         }
     }
      
+  public void datatable(String cari_nis){
+         DefaultTableModel tbl = new DefaultTableModel();
+         tbl.addColumn("NIS");
+         tbl.addColumn("Tanggal");
+         tbl.addColumn("Keterangan");
+         tbl.addColumn("Jumlah");
+         tbl.addColumn("Total");
+         tbl.addColumn("Status");
+        
   
+         if (cari_nis.equals("")){
+             try{
+                 Statement st =(Statement)conn.createStatement();
+                 ResultSet res=st.executeQuery("select nis,tanggal,keterangan,jumlah,total,status from spp");
+                 while (res.next()){
+                     tbl.addRow(new Object[]{ 
+                      
+                         res.getString("nis"),
+                         res.getString("tanggal"),
+                         res.getString("keterangan"),
+                         res.getString("jumlah"),
+                         res.getString("total"),
+                         res.getString("status"),
+                         
+                     });
+                 }
+             }catch (Exception e) {
+                 
+             }
+         }else{
+             try{
+                 Statement st = (Statement)conn.createStatement();
+                 ResultSet res = st.executeQuery("select nis,tanggal,keterangan,jumlah,total,status from spp where nis Like '%"+cari_nis+"%'");
+                 
+                 while(res.next()){
+                     tbl.addRow(new Object[]{
+                         res.getString("nis"),
+                         res.getString("tanggal"),
+                         res.getString("keterangan"),
+                         res.getString("jumlah"),
+                         res.getString("total"),
+                         res.getString("status"),
+                     });
+                 }
+             }catch (Exception e){
+                 
+             }
+         }
+         tblsppp.setModel(tbl);
+     }
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,8 +166,7 @@ tblsppp.setModel(tabmode);
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblsppp = new javax.swing.JTable();
-        txtcari = new javax.swing.JTextField();
-        btncari = new javax.swing.JButton();
+        cari_nis = new javax.swing.JTextField();
         btnhome = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -128,21 +195,12 @@ tblsppp.setModel(tabmode);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 126, 795, 156));
 
-        txtcari.addKeyListener(new java.awt.event.KeyAdapter() {
+        cari_nis.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtcariKeyPressed(evt);
+                cari_nisKeyPressed(evt);
             }
         });
-        jPanel1.add(txtcari, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 92, 228, -1));
-
-        btncari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
-        btncari.setText("Cari");
-        btncari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncariActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btncari, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 90, -1, -1));
+        jPanel1.add(cari_nis, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 92, 228, -1));
 
         btnhome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
         btnhome.addActionListener(new java.awt.event.ActionListener() {
@@ -247,15 +305,11 @@ tblsppp.setModel(tabmode);
         }
     }//GEN-LAST:event_btncetakActionPerformed
 
-    private void btncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncariActionPerformed
-        output();
-    }//GEN-LAST:event_btncariActionPerformed
-
-    private void txtcariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcariKeyPressed
+    private void cari_nisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cari_nisKeyPressed
          if (evt.getKeyCode()== KeyEvent.VK_ENTER){
             output();
         }
-    }//GEN-LAST:event_txtcariKeyPressed
+    }//GEN-LAST:event_cari_nisKeyPressed
 
     /**
      * @param args the command line arguments
@@ -294,16 +348,15 @@ tblsppp.setModel(tabmode);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncari;
     private javax.swing.JButton btncetak;
     private javax.swing.JButton btnhome;
     private javax.swing.JButton btntambah;
+    public static javax.swing.JTextField cari_nis;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tblsppp;
-    private javax.swing.JTextField txtcari;
     // End of variables declaration//GEN-END:variables
 }

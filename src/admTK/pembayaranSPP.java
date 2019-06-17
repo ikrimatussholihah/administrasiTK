@@ -1,6 +1,8 @@
 
 package admTK;
 
+import static admTK.alatdanseragam.tblalatseragam;
+import static admTK.data_spp1.tblsppp;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import program.Koneksi;
 import koneksi.koneksi;
@@ -29,6 +33,8 @@ public class pembayaranSPP extends javax.swing.JFrame {
     public pembayaranSPP() {
         koneksi=new koneksi();
         initComponents();
+        
+        
 
     }
     private void reset(){
@@ -37,6 +43,8 @@ public class pembayaranSPP extends javax.swing.JFrame {
         jumlahspp.setText("");
       
     }
+    
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -209,8 +217,8 @@ JOptionPane.showMessageDialog(null, "data gagal disimpan"+e);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnkembali;
     private javax.swing.JButton btnsimpan;
-    private javax.swing.JComboBox<String> bulanbayarComboBox;
-    private javax.swing.JTextField idsiswa;
+    public static javax.swing.JComboBox<String> bulanbayarComboBox;
+    public static javax.swing.JTextField idsiswa;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -219,6 +227,6 @@ JOptionPane.showMessageDialog(null, "data gagal disimpan"+e);
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jumlahspp;
+    public static javax.swing.JTextField jumlahspp;
     // End of variables declaration//GEN-END:variables
 }
