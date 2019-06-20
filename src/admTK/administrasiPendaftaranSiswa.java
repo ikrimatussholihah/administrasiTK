@@ -38,14 +38,14 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         koneksi=new koneksi();
         initComponents();
         datatable("");
-        cari_nis.getDocument().addDocumentListener(new DocumentListener(){
+        cari_nama.getDocument().addDocumentListener(new DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
-                datatable(cari_nis.getText());
+                datatable(cari_nama.getText());
             }
             @Override
             public void removeUpdate(DocumentEvent e) {
-                datatable(cari_nis.getText());
+                datatable(cari_nama.getText());
             }
             @Override
             public void changedUpdate(DocumentEvent e) {
@@ -68,7 +68,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     }
     
     private void output(){
-       Object header[] = {"No","NIS","Tanggal","Keterangan","Jumlah","Total","Status"};
+       Object header[] = {"No","Nama","NIS","Tanggal","Keterangan","Jumlah","Total","Status"};
         DefaultTableModel isi = new DefaultTableModel(null, header);
         tblpendaftaran.setModel(isi);
         
@@ -80,14 +80,15 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
                 //int k0 = rs.;
                 String k1 = rs.getString(1);
                 String k2 = rs.getString(2);
-                String k4 = rs.getString(4);
-                String k3 = rs.getDate(3).toString();
+                String k3 = rs.getString(3);
                 String k5 = rs.getString(5);
+                String k4 = rs.getDate(4).toString();
                 String k6 = rs.getString(6);
                 String k7 = rs.getString(7);
+                String k8 = rs.getString(8);
           
                 
-                String kolom[] = {k1,k2,k3,k4,k5,k6,k7};
+                String kolom[] = {k1,k2,k3,k4,k5,k6,k7,k8};
                 isi.addRow(kolom);
                
             }
@@ -105,7 +106,8 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
        try { 
        
                     st = koneksi.con.createStatement();
-                    String sql = "INSERT INTO pendaftaran (nis,tanggal,keterangan,jumlah,total,status) values ('"+nis.getText()+"',"
+                    String sql = "INSERT INTO pendaftaran (nis,nama,tanggal,keterangan,jumlah,total,status) values ('"+nis.getText()+"',"
+                             + "'"+nama.getText()+"',"
                             + "'"+new SimpleDateFormat(tanggal).format(tgl)+"',"
                             + "'"+cicilan.getSelectedItem()+"',"
                             + "'"+ttotal.getText()+"',"
@@ -123,6 +125,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     
      private void reset(){
         nis.setText("");
+        nama.setText("");
         cicilan.setSelectedItem("");
         jmlhpendaftaran.setText("");
         ttotal.setText("");
@@ -152,23 +155,25 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
        }
 
     
-    public void datatable(String cari_nis){
+    public void datatable(String cari_nama){
          DefaultTableModel tbl = new DefaultTableModel();
          tbl.addColumn("NIS");
+         tbl.addColumn("Nama");
          tbl.addColumn("Tanggal");
          tbl.addColumn("Keterangan");
          tbl.addColumn("Jumlah");
          tbl.addColumn("Total");
          tbl.addColumn("Status");
   
-         if (cari_nis.equals("")){
+         if (cari_nama.equals("")){
              try{
                  Statement st =(Statement)koneksi.con.createStatement();
-                 ResultSet res=st.executeQuery("select nis,tanggal,keterangan,jumlah,total,status from pendaftaran");
+                 ResultSet res=st.executeQuery("select nis,nama,tanggal,keterangan,jumlah,total,status from pendaftaran");
                  while (res.next()){
                      tbl.addRow(new Object[]{ 
                       
                          res.getString("nis"),
+                         res.getString("nama"),
                          res.getString("tanggal"),
                          res.getString("keterangan"),
                          res.getString("jumlah"),
@@ -183,11 +188,12 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
          }else{
              try{
                  Statement st = (Statement)koneksi.con.createStatement();
-                 ResultSet res = st.executeQuery("select nis,tanggal,keterangan,jumlah,total,status from pendaftaran where nis Like '%"+cari_nis+"%'");
+                 ResultSet res = st.executeQuery("select nis,nama,tanggal,keterangan,jumlah,total,status from pendaftaran where nama Like '%"+cari_nama+"%'");
                  
                  while(res.next()){
                      tbl.addRow(new Object[]{
                          res.getString("nis"),
+                         res.getString("nama"),
                          res.getString("tanggal"),
                          res.getString("keterangan"),
                          res.getString("jumlah"),
@@ -215,11 +221,11 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         cicilan = new javax.swing.JComboBox<>();
-        nis = new javax.swing.JTextField();
+        nama = new javax.swing.JTextField();
         jmlhpendaftaran = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        cari_nis = new javax.swing.JTextField();
+        cari_nama = new javax.swing.JTextField();
         simpan = new javax.swing.JButton();
         ttotal = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -234,36 +240,39 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblpendaftaran = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        nis = new javax.swing.JTextField();
+        nis2 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
-        jLabel4.setText("NIS");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 138, -1, -1));
+        jLabel4.setText("Nama");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel7.setText("Jumlah");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel10.setText("Pembayaran");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         cicilan.setFont(new java.awt.Font("Tekton Pro", 1, 14)); // NOI18N
         cicilan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cicilan 1", "cicilan 2" }));
-        getContentPane().add(cicilan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, 31));
-        getContentPane().add(nis, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 127, 230, 30));
+        getContentPane().add(cicilan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, 31));
+        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 230, 30));
 
         jmlhpendaftaran.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jmlhpendaftaranKeyPressed(evt);
             }
         });
-        getContentPane().add(jmlhpendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 230, 34));
+        getContentPane().add(jmlhpendaftaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 230, 34));
 
         jTextArea1.setBackground(new java.awt.Color(102, 153, 255));
         jTextArea1.setColumns(20);
@@ -273,7 +282,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 249, 160));
-        getContentPane().add(cari_nis, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 230, 31));
+        getContentPane().add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 230, 31));
 
         simpan.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         simpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save-icon-55391.png"))); // NOI18N
@@ -284,23 +293,23 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
             }
         });
         getContentPane().add(simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 300, 120, 51));
-        getContentPane().add(ttotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 230, 35));
+        getContentPane().add(ttotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 230, 35));
 
         jLabel3.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel3.setText("Total");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
-        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 230, 32));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 230, 32));
 
         jLabel5.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel5.setText("Status");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("*Enter");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, -1, -1));
 
         jLabel13.setText("Untuk memperoleh Total dan Status");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
 
@@ -363,7 +372,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblpendaftaran);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 665, 110));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 665, 110));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -372,13 +381,18 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 540, 72, -1));
+        getContentPane().add(nis, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 127, 230, 30));
+        getContentPane().add(nis2, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 127, 230, 30));
+
+        jLabel11.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
+        jLabel11.setText("NIS");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(-160, 120, 580, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-100, 120, 580, -1));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
-        jLabel9.setText("\n");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 550, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -400,11 +414,12 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
             rs = st.executeQuery(sql);
             rs.next();
             nis.setText(rs.getString(1));
-            cicilan.setSelectedItem(rs.getString(2));
-            tgl.setDate (rs.getDate(3));
-            jmlhpendaftaran.setText(rs.getString(4));
-            ttotal.setText(rs.getString(5));
-            status.setText(rs.getString(6));
+            nama.setText(rs.getString(2));
+            cicilan.setSelectedItem(rs.getString(3));
+            tgl.setDate (rs.getDate(4));
+            jmlhpendaftaran.setText(rs.getString(5));
+            ttotal.setText(rs.getString(6));
+            status.setText(rs.getString(7));
             
             }catch (Exception e){
             JOptionPane.showMessageDialog(null,"error : "+e.getMessage());
@@ -463,13 +478,15 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cari_nis;
+    private javax.swing.JTextField cari_nama;
     private javax.swing.JComboBox<String> cicilan;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -477,13 +494,14 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jmlhpendaftaran;
+    public static javax.swing.JTextField nama;
     public static javax.swing.JTextField nis;
+    public static javax.swing.JTextField nis2;
     private javax.swing.JButton simpan;
     private javax.swing.JTextField status;
     public static javax.swing.JTable tblpendaftaran;

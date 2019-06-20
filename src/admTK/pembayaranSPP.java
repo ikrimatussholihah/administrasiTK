@@ -39,6 +39,7 @@ public class pembayaranSPP extends javax.swing.JFrame {
     }
     private void reset(){
         idsiswa.setText("");
+        nama.setText("");
         bulanbayarComboBox.setSelectedItem("");
         jumlahspp.setText("");
       
@@ -67,7 +68,9 @@ public class pembayaranSPP extends javax.swing.JFrame {
         bulanbayarComboBox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        nama = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,14 +82,14 @@ public class pembayaranSPP extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
-        jLabel2.setText("NIS");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 93, -1, -1));
+        jLabel2.setText("Nama");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel4.setText("Jumlah");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 146, -1, -1));
-        jPanel1.add(idsiswa, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 93, 203, 35));
-        jPanel1.add(jumlahspp, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 146, 203, 38));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        jPanel1.add(idsiswa, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 203, 35));
+        jPanel1.add(jumlahspp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 208, 203, 30));
 
         btnsimpan.setFont(new java.awt.Font("Tekton Pro Cond", 1, 18)); // NOI18N
         btnsimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save-icon-55391.png"))); // NOI18N
@@ -96,7 +99,7 @@ public class pembayaranSPP extends javax.swing.JFrame {
                 btnsimpanActionPerformed(evt);
             }
         });
-        jPanel1.add(btnsimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 153, 48));
+        jPanel1.add(btnsimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 153, 48));
 
         btnkembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ip_icon_02_back.png"))); // NOI18N
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
@@ -104,15 +107,15 @@ public class pembayaranSPP extends javax.swing.JFrame {
                 btnkembaliActionPerformed(evt);
             }
         });
-        jPanel1.add(btnkembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 49, -1));
+        jPanel1.add(btnkembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 49, -1));
 
         jLabel6.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel6.setText("Bulan Bayar");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 228, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
         bulanbayarComboBox.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         bulanbayarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July", "Agustus", "September", "Oktober", "November", "Desember" }));
-        jPanel1.add(bulanbayarComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 220, 94, 42));
+        jPanel1.add(bulanbayarComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 94, 42));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,24 +123,29 @@ public class pembayaranSPP extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 54, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 54, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Rp.140,000,-");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, -1, -1));
+        jPanel1.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 200, 30));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgroundlogo.jpg"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-80, 0, 610, 410));
+        jLabel7.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel7.setText("NIS");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 93, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgroundlogo.jpg"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 610, 380));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -145,17 +153,18 @@ public class pembayaranSPP extends javax.swing.JFrame {
 
     private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
         // TODO add your handling code here:
-       String sql = "insert into spp (nis,tanggal,keterangan,jumlah,total,status) values (?,?,?,?,?,?) ";
+       String sql = "insert into spp (nis,nama,tanggal,keterangan,jumlah,total,status) values (?,?,?,?,?,?,?) ";
          String tanggal = "YYYY-MM-dd HH:mm:ss";
 try{
 Timestamp tgl = new Timestamp(new Date().getTime());
 PreparedStatement stat = conn.prepareStatement(sql);
 stat.setString(1, idsiswa.getText());
-stat.setString(2, new SimpleDateFormat(tanggal).format(tgl));
-stat.setString(3, (String) bulanbayarComboBox.getSelectedItem()); 
-stat.setString(4, jumlahspp.getText()); 
-stat.setString(5, jumlahspp.getText());
-stat.setString(6, "LUNAS"); 
+stat.setString(2, nama.getText());
+stat.setString(3, new SimpleDateFormat(tanggal).format(tgl));
+stat.setString(4, (String) bulanbayarComboBox.getSelectedItem()); 
+stat.setString(5, jumlahspp.getText()); 
+stat.setString(6, jumlahspp.getText());
+stat.setString(7, "LUNAS"); 
 
 stat.executeUpdate();
 JOptionPane.showMessageDialog(null, "data berhasil disimpan");
@@ -222,11 +231,13 @@ JOptionPane.showMessageDialog(null, "data gagal disimpan"+e);
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JTextField jumlahspp;
+    private javax.swing.JTextField nama;
     // End of variables declaration//GEN-END:variables
 }

@@ -633,7 +633,8 @@ public class pendataansiswa extends javax.swing.JFrame {
 
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
         // TODO add your handling code here:
-        
+         new pendataansiswa().setVisible(true);
+        dispose();
     }//GEN-LAST:event_tambahActionPerformed
 
     private void btncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncariActionPerformed
