@@ -5,17 +5,45 @@
  */
 package admTK;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lenovo
  */
 public class cetakadm extends javax.swing.JFrame {
+    Statement st;
+    ResultSet rs;
+    koneksi koneksi;
 
     /**
      * Creates new form cetakadm
      */
     public cetakadm() {
+          koneksi=new koneksi();
         initComponents();
+    }
+    
+    private void koneksi(){
+        Connection con;
+        String id, pass, driver, url;
+        id= "root";
+        pass = " ";
+        driver = "com.mysql.jdbc.Driver";
+        url = "jdbc:mysql://localhost/administrasi";
+        try{
+            Class.forName(driver).newInstance();
+            con = DriverManager.getConnection(url,id,pass);
+            if (con==null){
+                JOptionPane.showMessageDialog (null,"KONEKSI DATABASE GAGAL");
+            }
+        } catch (Exception e){
+            System.out.println(""+e.getMessage());
+        }
     }
 
     /**
@@ -30,92 +58,86 @@ public class cetakadm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        cetakalatseragam = new javax.swing.JButton();
-        cetakspp = new javax.swing.JButton();
-        cetakdaftarsiswa = new javax.swing.JButton();
+        laporandatasiswa = new javax.swing.JButton();
+        laporanpendaftaran = new javax.swing.JButton();
+        laporanalatseragam = new javax.swing.JButton();
+        laporanspp = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Sakkal Majalla", 1, 36)); // NOI18N
         jLabel1.setText("TK Islam Ruhama Bekasi");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(277, 52, -1, 39));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, 39));
 
-        jPanel3.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel3.setBackground(new java.awt.Color(0, 0, 51));
 
-        jLabel7.setFont(new java.awt.Font("Trajan Pro", 1, 18)); // NOI18N
-        jLabel7.setText("Laporan Pembayaran Alat dan Seragam");
+        laporandatasiswa.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        laporandatasiswa.setText("Laporan Pendataan Siswa");
+        laporandatasiswa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporandatasiswaActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Trajan Pro", 1, 18)); // NOI18N
-        jLabel5.setText("Laporan Pembayaran spp");
+        laporanpendaftaran.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        laporanpendaftaran.setText("Laporan Pendaftaran Siswa");
+        laporanpendaftaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporanpendaftaranActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setFont(new java.awt.Font("Trajan Pro", 1, 18)); // NOI18N
-        jLabel4.setText("Laporan Pembayaran Pendaftaran Siswa");
+        laporanalatseragam.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        laporanalatseragam.setText("Laporan Alat dan Seragam");
+        laporanalatseragam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporanalatseragamActionPerformed(evt);
+            }
+        });
 
-        cetakalatseragam.setFont(new java.awt.Font("Prestige Elite Std", 1, 14)); // NOI18N
-        cetakalatseragam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cetak22.png"))); // NOI18N
-        cetakalatseragam.setText("Cetak");
-
-        cetakspp.setFont(new java.awt.Font("Prestige Elite Std", 1, 14)); // NOI18N
-        cetakspp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cetak22.png"))); // NOI18N
-        cetakspp.setText("Cetak");
-
-        cetakdaftarsiswa.setFont(new java.awt.Font("Prestige Elite Std", 1, 14)); // NOI18N
-        cetakdaftarsiswa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cetak22.png"))); // NOI18N
-        cetakdaftarsiswa.setText("Cetak");
+        laporanspp.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        laporanspp.setText("Laporan SPP");
+        laporanspp.setToolTipText("");
+        laporanspp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporansppActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
-                .addGap(83, 83, 83))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(cetakalatseragam, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cetakdaftarsiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cetakspp, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(101, 101, 101)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(laporanspp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(laporanalatseragam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(laporandatasiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(laporanpendaftaran, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(cetakdaftarsiswa)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel5)
+                .addGap(22, 22, 22)
+                .addComponent(laporandatasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(cetakspp)
-                .addGap(34, 34, 34)
-                .addComponent(jLabel7)
-                .addGap(28, 28, 28)
-                .addComponent(cetakalatseragam)
-                .addGap(73, 73, 73))
+                .addComponent(laporanpendaftaran, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(laporanalatseragam, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(laporanspp, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 570, 480));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 510, 280));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,26 +145,24 @@ public class cetakadm extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, 60, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 60, -1));
 
         jLabel2.setFont(new java.awt.Font("Sakkal Majalla", 1, 36)); // NOI18N
-        jLabel2.setText("Cetak Laporan Administrasi  ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, 30));
+        jLabel2.setText("Laporan Keseluruhan siswa");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logotkkecilLL.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
         );
 
         pack();
@@ -153,6 +173,30 @@ public class cetakadm extends javax.swing.JFrame {
         new menuutama().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void laporandatasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporandatasiswaActionPerformed
+        // TODO add your handling code here:
+        new cetakdatasiswa().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_laporandatasiswaActionPerformed
+
+    private void laporanpendaftaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanpendaftaranActionPerformed
+        // TODO add your handling code here:
+        new cetakpendaftaransiswa().setVisible(true);
+        dispose(); 
+    }//GEN-LAST:event_laporanpendaftaranActionPerformed
+
+    private void laporanalatseragamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanalatseragamActionPerformed
+        // TODO add your handling code here:
+        new cetakalatseragama().setVisible(true);
+        dispose(); 
+    }//GEN-LAST:event_laporanalatseragamActionPerformed
+
+    private void laporansppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporansppActionPerformed
+        // TODO add your handling code here:
+        new cetakspp().setVisible(true);
+        dispose(); 
+    }//GEN-LAST:event_laporansppActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,17 +234,15 @@ public class cetakadm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cetakalatseragam;
-    private javax.swing.JButton cetakdaftarsiswa;
-    private javax.swing.JButton cetakspp;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton laporanalatseragam;
+    private javax.swing.JButton laporandatasiswa;
+    private javax.swing.JButton laporanpendaftaran;
+    private javax.swing.JButton laporanspp;
     // End of variables declaration//GEN-END:variables
 }

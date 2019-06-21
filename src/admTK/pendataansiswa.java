@@ -56,7 +56,6 @@ public class pendataansiswa extends javax.swing.JFrame {
                 throw new UnsupportedOperationException("Not Supported yet.");//to change body og generated methods. choose tools |templates.
             }
         });
-           // nama.setEnabled(false);
                   
         output();
         icon();  
@@ -69,23 +68,16 @@ public class pendataansiswa extends javax.swing.JFrame {
     
     private void output(){
        Object header[] = {"No","NIS","Nama","NoTelp","Jns Kelamin","Tempat","Tgl Lahir","Nama Orang Tua","Pekerjaan Orang Tua","Agama","Alamat","Diterima"};
-      // tabmode=new DefaultTableModel(null, Baris);
-       //String cariitem=btncari.getText();
-       
-       
+
         DefaultTableModel isi = new DefaultTableModel(null, header);
         tblTK.setModel(isi);
         
         
         String sql = "SELECT * from datasiswa";
         try{
-           // String sql="SELECT * FROM datasiswa where id like'%"+cariitem+"%' or nis like'%"+cariitem+"%' order by id asc";
             st = koneksi.con.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()){
-               // tabmode.addRow(new Object[]){
-                //int k0 = rs.getInt(1);
-                //String k0 = rs.getString(1);
                 String k1 = rs.getString(1);
                 String k2 = rs.getString(2);
                 String k3 = rs.getString(3);
@@ -106,7 +98,6 @@ public class pendataansiswa extends javax.swing.JFrame {
             }
             
             st.close();
-            //tblTK.setModel(tabmode);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"error "+e.getMessage());
         }
@@ -114,11 +105,8 @@ public class pendataansiswa extends javax.swing.JFrame {
     
     private void input(){
         String tanggal = "YYYY-MM-dd";
-        //int id = 0;
        try {
-                    
                     st = koneksi.con.createStatement();
-                    
                     String sql = "INSERT INTO datasiswa (nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima) values ('"+idsiswa.getText()+"',"
                             + "'"+nama.getText()+"',"
                             + "'"+txthp.getText()+"',"
@@ -142,11 +130,11 @@ public class pendataansiswa extends javax.swing.JFrame {
     }
       private void update(){
         try{
-            String sql = "update datasiswa set "
-                    + "nis=' " +idsiswa.getText()+"'"
-                    + "nama='"+nama.getText()+"'"
-                    + "no_hp='"+txthp.getText()+"'"
-                    + "jns_kel='"+cbjk.getSelectedItem()+"'"
+            String sql = "update datasiswa set 
+                    + "nis= '"
+                    +idsiswa.getText()+"',
+                    nama='"+nama.getText()+"',
+                    no_hp='"+txthp.getText()+"',jns_kel='"+cbjk.getSelectedItem()+"'"
                     + "tmptlahir='"+txttempat.getText()+"'"
                     + "tgllahir='"+tgl.getDateFormatString()+"'"
                     + "nmortu='"+nmortu.getText()+"'"
@@ -154,12 +142,11 @@ public class pendataansiswa extends javax.swing.JFrame {
                     + "agama='"+agama.getText()+"'"
                     + "alamat='"+txtalamat.getText()+"' "
                     + "terima='"+cbterima.getSelectedItem()+"'"
-                    + "where nis = '"+idsiswa.getText()+"'";
-            
+                    + "where nis ='"+idsiswa.getText()+"'";
+            System.out.println(sql);
 
             JOptionPane.showMessageDialog(null, "Data Telah di Ubah");
            st.executeUpdate(sql);
-           // reset();
         }
         catch(SQLException e){
             JOptionPane.showMessageDialog(null," Data Gagal Diubah "+e);
@@ -171,7 +158,6 @@ public class pendataansiswa extends javax.swing.JFrame {
         String query = "delete from datasiswa where id_siswa= '"+DATA+"'";
         try{
             st = koneksi.con.createStatement();
-            //st.executeUpdate(query);
             JOptionPane.showMessageDialog(null,"Data Berhasil Dihapus");
             st.executeUpdate(query);
         }catch (Exception e){

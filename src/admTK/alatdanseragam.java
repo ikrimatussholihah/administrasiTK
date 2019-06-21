@@ -221,10 +221,6 @@ public class alatdanseragam extends javax.swing.JFrame {
     private void initComponents() {
 
         jRadioButton2 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        nisalat = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         simpan = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -240,7 +236,6 @@ public class alatdanseragam extends javax.swing.JFrame {
         ttotal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jumlah = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         cbsemester = new javax.swing.JComboBox<>();
@@ -249,7 +244,12 @@ public class alatdanseragam extends javax.swing.JFrame {
         nama = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        nisalat = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
         jRadioButton2.setText("jRadioButton2");
@@ -257,20 +257,6 @@ public class alatdanseragam extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Pembayaran Alat dan Seragam");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 16, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("TK Islam Ruhama Bekasi");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 41, -1, -1));
-        getContentPane().add(nisalat, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 111, 210, 29));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logotkkecilLL.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 11, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 51));
 
@@ -345,13 +331,13 @@ public class alatdanseragam extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 590, 68, -1));
         jPanel1.add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 170, 30));
 
-        jLabel8.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel8.setText("Status");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
         jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 200, 32));
         jPanel1.add(ttotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 200, 32));
 
-        jLabel9.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel9.setText("Total");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
@@ -362,10 +348,6 @@ public class alatdanseragam extends javax.swing.JFrame {
         });
         jPanel1.add(jumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 200, 32));
 
-        jLabel7.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
-        jLabel7.setText("Jumlah");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
-
         jLabel13.setText("Untuk memperoleh Total dan Status");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, -1));
 
@@ -375,27 +357,45 @@ public class alatdanseragam extends javax.swing.JFrame {
 
         cbsemester.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         cbsemester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semester Ganjil", "Semester Genap" }));
-        jPanel1.add(cbsemester, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 158, 31));
+        jPanel1.add(cbsemester, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 158, 31));
 
         cbalatseragam.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         cbalatseragam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seragam TK dan Alat Tulis", "Alat tulis TK" }));
-        jPanel1.add(cbalatseragam, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, -1, -1));
+        jPanel1.add(cbalatseragam, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel4.setText("Pembayaran");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
         jPanel1.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 210, 30));
 
-        jLabel3.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel3.setText("NIS");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel14.setText("Nama");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        jPanel1.add(nisalat, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 210, 29));
+
+        jLabel15.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
+        jLabel15.setText("Jumlah");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logotkkecilLL.png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tekton Pro", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Pembayaran Alat dan Seragam");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tekton Pro", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("TK Islam Ruhama Bekasi");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 660));
 
@@ -497,12 +497,12 @@ public class alatdanseragam extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

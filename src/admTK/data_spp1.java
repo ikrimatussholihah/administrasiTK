@@ -270,7 +270,7 @@ tblsppp.setModel(tabmode);
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,9 +309,7 @@ tblsppp.setModel(tabmode);
     }//GEN-LAST:event_btncetakActionPerformed
 
     private void cari_namaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cari_namaKeyPressed
-         if (evt.getKeyCode()== KeyEvent.VK_ENTER){
-            output();
-        }
+         
     }//GEN-LAST:event_cari_namaKeyPressed
 
     /**

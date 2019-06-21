@@ -142,6 +142,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     
     private void status(){
         int  to =Integer.parseInt(ttotal.getText());
+        //cicilan 1 + cicilan 2 = cicilan;
         if (to==700000){
             status.setText("LUNAS");
             simpan.setEnabled(true);
@@ -292,7 +293,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
                 simpanActionPerformed(evt);
             }
         });
-        getContentPane().add(simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 300, 120, 51));
+        getContentPane().add(simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 320, 210, 51));
         getContentPane().add(ttotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 230, 35));
 
         jLabel3.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
@@ -349,10 +350,10 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-290, 0, 1190, 120));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-290, 0, 1190, 110));
 
         tblpendaftaran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -389,10 +390,11 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(-160, 120, 580, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 110, 580, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
+        jLabel6.setToolTipText("");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
