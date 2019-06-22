@@ -78,7 +78,7 @@ public class data_spp1 extends javax.swing.JFrame {
         }
     }
  protected void output(){
-Object header[] ={"No","Nama","NIS","Jumlah","Tanggal","Keterangan","Total","Status"};
+Object header[] ={"No","NIS","Nama","Tanggal","Keterangan","Jumlah","Total","Status"};
 tabmode = new DefaultTableModel(null, header);
 
 try {
@@ -174,7 +174,6 @@ tblsppp.setModel(tabmode);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btncetak = new javax.swing.JButton();
         btntambah = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -211,7 +210,7 @@ tblsppp.setModel(tabmode);
                 btnhomeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnhome, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 510, 59, -1));
+        jPanel1.add(btnhome, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 59, -1));
 
         jLabel1.setFont(new java.awt.Font("Tekton Pro Cond", 1, 36)); // NOI18N
         jLabel1.setText("Data SPP");
@@ -222,15 +221,6 @@ tblsppp.setModel(tabmode);
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 50, 770, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 51));
-
-        btncetak.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        btncetak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cetak22.png"))); // NOI18N
-        btncetak.setText("Print");
-        btncetak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncetakActionPerformed(evt);
-            }
-        });
 
         btntambah.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         btntambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tambah.png"))); // NOI18N
@@ -245,26 +235,20 @@ tblsppp.setModel(tabmode);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btncetak, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(btntambah)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(btntambah, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(btncetak)
-                .addGap(31, 31, 31))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 150, 190));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 370, 150, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,7 +258,7 @@ tblsppp.setModel(tabmode);
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -290,23 +274,8 @@ tblsppp.setModel(tabmode);
         // TODO add your handling code here:
         pembayaranSPP as = new pembayaranSPP();
         as.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btntambahActionPerformed
-
-    private void btncetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncetakActionPerformed
-        // TODO add your handling code here:
-        try{
-            String namaFile = "src/laporan/laporanspp.jasper";
-            Connection conn = new koneksi().connect();
-            HashMap parameter = new HashMap();
-            File report_file = new File(namaFile);
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(report_file.getPath());
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter, conn);
-            JasperViewer.viewReport(jasperPrint, false);
-            JasperViewer.setDefaultLookAndFeelDecorated(true);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }//GEN-LAST:event_btncetakActionPerformed
 
     private void cari_namaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cari_namaKeyPressed
          
@@ -349,7 +318,6 @@ tblsppp.setModel(tabmode);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncetak;
     private javax.swing.JButton btnhome;
     private javax.swing.JButton btntambah;
     public static javax.swing.JTextField cari_nama;

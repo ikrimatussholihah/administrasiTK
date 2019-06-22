@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +21,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -40,7 +43,7 @@ public class pendataansiswa extends javax.swing.JFrame {
     public pendataansiswa() {
         koneksi=new koneksi();
         initComponents();
-        
+        tgl.setDateFormatString("YYYY-MM-dd");
         datatable("");
         cari_nama.getDocument().addDocumentListener(new DocumentListener(){
             @Override
@@ -67,7 +70,7 @@ public class pendataansiswa extends javax.swing.JFrame {
     }
     
     private void output(){
-       Object header[] = {"No","NIS","Nama","NoTelp","Jns Kelamin","Tempat","Tgl Lahir","Nama Orang Tua","Pekerjaan Orang Tua","Agama","Alamat","Diterima"};
+       Object header[] = {"No","NIS","Nama","NoTelp","Jns Kelamin","Tempat","Tgl Lahir","Nama Orang Tua","Pekerjaan Orang Tua","Agama","Alamat","Diterima","Tahun Ajaran"};
 
         DefaultTableModel isi = new DefaultTableModel(null, header);
         tblTK.setModel(isi);
@@ -90,9 +93,10 @@ public class pendataansiswa extends javax.swing.JFrame {
                 String k10 = rs.getString(10);
                 String k11 = rs.getString(11);
                 String k12 = rs.getString(12);
+                String k13 = rs.getString(13);
            
                 
-                String kolom[] = {k1,k2,k3,k4,k5,k6,k7,k8,k9,k10,k11,k12};
+                String kolom[] = {k1,k2,k3,k4,k5,k6,k7,k8,k9,k10,k11,k12,k13};
                isi.addRow(kolom);  
            
             }
@@ -107,7 +111,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         String tanggal = "YYYY-MM-dd";
        try {
                     st = koneksi.con.createStatement();
-                    String sql = "INSERT INTO datasiswa (nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima) values ('"+idsiswa.getText()+"',"
+                    String sql = "INSERT INTO datasiswa (nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima,thnajaran) values ('"+idsiswa.getText()+"',"
                             + "'"+nama.getText()+"',"
                             + "'"+txthp.getText()+"',"
                             + "'"+cbjk.getSelectedItem()+"',"
@@ -117,7 +121,8 @@ public class pendataansiswa extends javax.swing.JFrame {
                             + "'"+portu.getText()+"',"
                             + "'"+agama.getText()+"',"
                             + "'"+txtalamat.getText()+"',"
-                            + "'"+cbterima.getSelectedItem()+"')";
+                            + "'"+cbterima.getSelectedItem()+"',"
+                            + "'"+cbthn.getSelectedItem()+"')";
  
                     JOptionPane.showMessageDialog(null, "Berhasil Disimpan");
                     st.executeUpdate(sql);
@@ -129,24 +134,24 @@ public class pendataansiswa extends javax.swing.JFrame {
 
     }
       private void update(){
+          String tanggal = "YYYY-MM-dd";
         try{
-            String sql = "update datasiswa set 
-                    + "nis= '"
-                    +idsiswa.getText()+"',
-                    nama='"+nama.getText()+"',
-                    no_hp='"+txthp.getText()+"',jns_kel='"+cbjk.getSelectedItem()+"'"
-                    + "tmptlahir='"+txttempat.getText()+"'"
-                    + "tgllahir='"+tgl.getDateFormatString()+"'"
-                    + "nmortu='"+nmortu.getText()+"'"
-                    + "p_ortu='"+portu.getText()+"'"
-                    + "agama='"+agama.getText()+"'"
-                    + "alamat='"+txtalamat.getText()+"' "
-                    + "terima='"+cbterima.getSelectedItem()+"'"
-                    + "where nis ='"+idsiswa.getText()+"'";
+           String sql = "update datasiswa set nis= '"+idsiswa.getText()+"',"
+                    + "nama = '"+nama.getText()+"',"
+                    + "no_hp = '"+txthp.getText()+"',"
+                    + "jns_kel = '"+cbjk.getSelectedItem()+"',"
+                    + "tmptlahir = '"+txttempat.getText()+"',"
+                    + "tgllahir = '"+new SimpleDateFormat(tanggal).format(tgl.getDate())+"',"
+                    + "nmortu = '"+nmortu.getText()+"',"
+                    + "p_ortu = '"+portu.getText()+"',"
+                    + "agama = '"+agama.getText()+"',"
+                    + "alamat = '"+txtalamat.getText()+"',"
+                    + "terima = '"+cbterima.getSelectedItem()+"',"
+                    + "thnajaran = '"+cbthn.getSelectedItem()+"' where nis = '"+idsiswa.getText()+"'";
             System.out.println(sql);
-
+            st = koneksi.con.createStatement();
+            st.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Data Telah di Ubah");
-           st.executeUpdate(sql);
         }
         catch(SQLException e){
             JOptionPane.showMessageDialog(null," Data Gagal Diubah "+e);
@@ -176,6 +181,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         agama.setText("");
         txtalamat.setText("");
         cbterima.setSelectedItem("");
+        cbthn.setSelectedItem("");
        
     }
      
@@ -193,10 +199,11 @@ public class pendataansiswa extends javax.swing.JFrame {
          tbl.addColumn("Agama");
          tbl.addColumn("Alamat");
          tbl.addColumn("Diterima");
+         tbl.addColumn("Tahun Ajaran");
          if (cari_nama.equals("")){
              try{
                  Statement st =(Statement)koneksi.con.createStatement();
-                 ResultSet res=st.executeQuery("select id_siswa,nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima from datasiswa");
+                 ResultSet res=st.executeQuery("select id_siswa,nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima,thnajaran from datasiswa");
                  while (res.next()){
                      tbl.addRow(new Object[]{ 
                          res.getString("id_siswa"),
@@ -211,6 +218,7 @@ public class pendataansiswa extends javax.swing.JFrame {
                          res.getString("agama"),
                          res.getString("alamat"),
                          res.getString("terima"),
+                         res.getString("thnajaran"),
                      });
                  }
              }catch (Exception e) {
@@ -219,7 +227,7 @@ public class pendataansiswa extends javax.swing.JFrame {
          }else{
              try{
                  Statement st = (Statement)koneksi.con.createStatement();
-                 ResultSet res = st.executeQuery("select id_siswa,nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima from datasiswa where nama Like '%"+cari_nama+"%'");
+                 ResultSet res = st.executeQuery("select id_siswa,nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima,thn ajaran from datasiswa where nama Like '%"+cari_nama+"%'");
                  
                  while(res.next()){
                      tbl.addRow(new Object[]{
@@ -234,7 +242,8 @@ public class pendataansiswa extends javax.swing.JFrame {
                          res.getString("p_ortu"),
                          res.getString("agama"),
                          res.getString("alamat"),
-                         res.getString("terima")
+                         res.getString("terima"),
+                         res.getString("thnajaran")
                      });
                  }
              }catch (Exception e){
@@ -283,10 +292,8 @@ public class pendataansiswa extends javax.swing.JFrame {
         btnsave = new javax.swing.JButton();
         btnedit = new javax.swing.JButton();
         btnhapus = new javax.swing.JButton();
-        tambah = new javax.swing.JButton();
         btnhome = new javax.swing.JButton();
         tgl = new com.toedter.calendar.JDateChooser();
-        btncari = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -294,7 +301,9 @@ public class pendataansiswa extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cbterima = new javax.swing.JComboBox<>();
+        jLabel18 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        cbthn = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -362,7 +371,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblTK);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 1030, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 1130, 200));
 
         txtalamat.setColumns(20);
         txtalamat.setRows(5);
@@ -373,7 +382,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         cbjk.setFont(new java.awt.Font("Tekton Pro Ext", 1, 14)); // NOI18N
         cbjk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L", "P" }));
         jPanel1.add(cbjk, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
-        jPanel1.add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 258, 25));
+        jPanel1.add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 258, 25));
 
         jLabel11.setFont(new java.awt.Font("Simplified Arabic Fixed", 1, 18)); // NOI18N
         jLabel11.setText("Tgl Lahir");
@@ -418,15 +427,6 @@ public class pendataansiswa extends javax.swing.JFrame {
             }
         });
 
-        tambah.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tambah.png"))); // NOI18N
-        tambah.setText("Tambah");
-        tambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahActionPerformed(evt);
-            }
-        });
-
         btnhome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
         btnhome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -441,21 +441,19 @@ public class pendataansiswa extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnhapus)
-                                    .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tambah)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(btnhome, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 10, Short.MAX_VALUE))
+                            .addComponent(btnhapus)
+                            .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 3, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 10, Short.MAX_VALUE)
                         .addComponent(btnsave)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(btnhome, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,23 +464,13 @@ public class pendataansiswa extends javax.swing.JFrame {
                 .addComponent(btnhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnhome)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 100, 130, 380));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 100, 130, 310));
         jPanel1.add(tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 140, 30));
-
-        btncari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
-        btncari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncariActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btncari, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -508,7 +496,7 @@ public class pendataansiswa extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(119, 119, 119)
                         .addComponent(jLabel9)))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(308, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +511,7 @@ public class pendataansiswa extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, -1));
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
@@ -538,14 +526,22 @@ public class pendataansiswa extends javax.swing.JFrame {
         cbterima.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kelompok A", "Kelompok B" }));
         jPanel1.add(cbterima, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, -1, -1));
 
+        jLabel18.setFont(new java.awt.Font("Simplified Arabic Fixed", 1, 18)); // NOI18N
+        jLabel18.setText("Tahun Ajaran");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
+
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgroundlogo.jpg"))); // NOI18N
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 670, -1));
+
+        cbthn.setFont(new java.awt.Font("Yu Gothic Light", 1, 14)); // NOI18N
+        cbthn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014/2015", "2015/2016", "2016/2017", "2017/2018", "2018/2019", "2019/2020", "2020/2021", "2021/2022", "2022/2023", "2023/2024", "2024/2025" }));
+        jPanel1.add(cbthn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 350, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -572,32 +568,42 @@ public class pendataansiswa extends javax.swing.JFrame {
 
     private void tblTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTKMouseClicked
         // TODO add your handling code here:
-        String KD = String.valueOf(pendataansiswa.tblTK.getValueAt(pendataansiswa.tblTK.getSelectedRow(),0));
-        System.out.println(KD);
-        String sql = "SELECT nis,nama,no_hp,jns_kel,tmptlahir,tgllahir,nmortu,p_ortu,agama,alamat,terima FROM datasiswa WHERE nis='"+KD+"'";
-        try{
-            st = koneksi.con.createStatement();
-            rs = st.executeQuery(sql);
-            rs.next();
-            idsiswa.setText(rs.getString(2));
-            nama.setText(rs.getString(3));
-            txthp.setText(rs.getString(4));
-            cbjk.setSelectedItem(rs.getString(5));
-            txttempat.setText(rs.getString(6));
-            tgl.setDate (rs.getDate(7));
-            nmortu.setText(rs.getString(8));
-            portu.setText(rs.getString(9));
-            agama.setText(rs.getString(10));
-            txtalamat.setText(rs.getString(11));
-            cbterima.setSelectedItem(rs.getString(12));
-           
-          
-            
-           
-            }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"error : "+e.getMessage());
+        SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");
+        int bar = tblTK.getSelectedRow();
+        String id = tblTK.getValueAt(bar, 1).toString();
+        String nama1 = tblTK.getValueAt(bar, 2).toString();
+        String no_hp = tblTK.getValueAt(bar, 3).toString();
+        String jenis_kel = tblTK.getValueAt(bar, 4).toString();
+        String tempat_lahir = tblTK.getValueAt(bar, 5).toString();
+        String tgl_lahir = tblTK.getValueAt(bar, 6).toString();
+        String nama_ortu = tblTK.getValueAt(bar, 7).toString();
+        String pekerjaan_ortu = tblTK.getValueAt(bar, 8).toString();
+        String agama1 = tblTK.getValueAt(bar, 9).toString();
+        String alamat = tblTK.getValueAt(bar, 10).toString();
+        String terima_kelas = tblTK.getValueAt(bar, 11).toString();
+        String tahun_ajaran = tblTK.getValueAt(bar, 12).toString();
+        
+       
+        try {
+            Date dateok = formatter.parse(tgl_lahir);
+            tgl.setDate(dateok);
+        } catch (ParseException ex) {
+            Logger.getLogger(pendataansiswa.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // reset();              
+        
+       
+        idsiswa.setText(id);
+        nama.setText(nama1);
+        txthp.setText(no_hp);
+        cbjk.setSelectedItem(jenis_kel);
+        txttempat.setText(tempat_lahir);
+        nmortu.setText(nama_ortu);
+        portu.setText(pekerjaan_ortu);
+        agama.setText(agama1);
+        txtalamat.setText(alamat);
+        cbterima.setSelectedItem(terima_kelas);
+        cbthn.setSelectedItem(tahun_ajaran);
+    
     }//GEN-LAST:event_tblTKMouseClicked
 
     private void btnhomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhomeActionPerformed
@@ -616,17 +622,6 @@ public class pendataansiswa extends javax.swing.JFrame {
         output();
         reset();
     }//GEN-LAST:event_btnhapusActionPerformed
-
-    private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
-        // TODO add your handling code here:
-         new pendataansiswa().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_tambahActionPerformed
-
-    private void btncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncariActionPerformed
-        // TODO add your handling code here:
-        datatable("");
-    }//GEN-LAST:event_btncariActionPerformed
 
     /**
      * @param args the command line arguments
@@ -665,7 +660,6 @@ public class pendataansiswa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField agama;
-    public static javax.swing.JButton btncari;
     private javax.swing.JButton btnedit;
     public static javax.swing.JButton btnhapus;
     private javax.swing.JButton btnhome;
@@ -673,6 +667,7 @@ public class pendataansiswa extends javax.swing.JFrame {
     public static javax.swing.JTextField cari_nama;
     private javax.swing.JComboBox<String> cbjk;
     private javax.swing.JComboBox<String> cbterima;
+    private javax.swing.JComboBox<String> cbthn;
     private javax.swing.JTextField idsiswa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -683,6 +678,7 @@ public class pendataansiswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -699,7 +695,6 @@ public class pendataansiswa extends javax.swing.JFrame {
     public static javax.swing.JTextField nama;
     private javax.swing.JTextField nmortu;
     private javax.swing.JTextField portu;
-    private javax.swing.JButton tambah;
     public static javax.swing.JTable tblTK;
     public static com.toedter.calendar.JDateChooser tgl;
     private javax.swing.JTextArea txtalamat;

@@ -30,12 +30,14 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     Statement st;
     ResultSet rs;
     koneksi koneksi;
-
+    int totalInt;
+    int Cicilan1;
     /**
      * Creates new form Pembayaran
      */
     public administrasiPendaftaranSiswa() {
         koneksi=new koneksi();
+        
         initComponents();
         datatable("");
         cari_nama.getDocument().addDocumentListener(new DocumentListener(){
@@ -68,7 +70,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     }
     
     private void output(){
-       Object header[] = {"No","Nama","NIS","Tanggal","Keterangan","Jumlah","Total","Status"};
+       Object header[] = {"No","NIS","Nama","Tanggal","Keterangan","Jumlah","Total","Status"};
         DefaultTableModel isi = new DefaultTableModel(null, header);
         tblpendaftaran.setModel(isi);
         
@@ -102,7 +104,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         String tanggal = "YYYY-MM-dd HH:mm:ss";
         String ket = null;
         Timestamp tgl = new Timestamp(new Date().getTime());
-        //int id = 0;
+        
        try { 
        
                     st = koneksi.con.createStatement();
@@ -134,15 +136,14 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     }
      
      private void total(){
-        int jmlh = Integer.parseInt(jmlhpendaftaran.getText());
+        int Cicilan2 = Integer.parseInt(jmlhpendaftaran.getText());
         int totl = 0;
-        int ttal = jmlh+totl;
+        int ttal = Cicilan1+Cicilan2;
         ttotal.setText(Integer.toString(ttal));
     }
     
     private void status(){
         int  to =Integer.parseInt(ttotal.getText());
-        //cicilan 1 + cicilan 2 = cicilan;
         if (to==700000){
             status.setText("LUNAS");
             simpan.setEnabled(true);
@@ -158,6 +159,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     
     public void datatable(String cari_nama){
          DefaultTableModel tbl = new DefaultTableModel();
+         tbl.addColumn("No");
          tbl.addColumn("NIS");
          tbl.addColumn("Nama");
          tbl.addColumn("Tanggal");
@@ -169,10 +171,11 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
          if (cari_nama.equals("")){
              try{
                  Statement st =(Statement)koneksi.con.createStatement();
-                 ResultSet res=st.executeQuery("select nis,nama,tanggal,keterangan,jumlah,total,status from pendaftaran");
+                 ResultSet res=st.executeQuery("select id_pembayaran,nis,nama,tanggal,keterangan,jumlah,total,status from pendaftaran");
                  while (res.next()){
                      tbl.addRow(new Object[]{ 
                       
+                         res.getString("id_pembayaran"),
                          res.getString("nis"),
                          res.getString("nama"),
                          res.getString("tanggal"),
@@ -189,10 +192,11 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
          }else{
              try{
                  Statement st = (Statement)koneksi.con.createStatement();
-                 ResultSet res = st.executeQuery("select nis,nama,tanggal,keterangan,jumlah,total,status from pendaftaran where nama Like '%"+cari_nama+"%'");
+                 ResultSet res = st.executeQuery("select id_pembayaran,nis,nama,tanggal,keterangan,jumlah,total,status from pendaftaran where nama Like '%"+cari_nama+"%'");
                  
                  while(res.next()){
                      tbl.addRow(new Object[]{
+                         res.getString("id_pembayaran"),
                          res.getString("nis"),
                          res.getString("nama"),
                          res.getString("tanggal"),
@@ -244,6 +248,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         nis = new javax.swing.JTextField();
         nis2 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        update = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -389,6 +394,15 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         jLabel11.setText("NIS");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
+        update.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+        getContentPane().add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 390, 210, 50));
+
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 110, 580, -1));
 
@@ -408,31 +422,31 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
 
     private void tblpendaftaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblpendaftaranMouseClicked
         // TODO add your handling code here:
-        String PS = String.valueOf(administrasiPendaftaranSiswa.tblpendaftaran.getValueAt(administrasiPendaftaranSiswa.tblpendaftaran.getSelectedRow(),0));
-        System.out.println(PS);
-        String sql = "SELECT * FROM pendaftaran WHERE id_pembayaran ='"+PS+"'";
-        try{
-            st = koneksi.con.createStatement();
-            rs = st.executeQuery(sql);
-            rs.next();
-            nis.setText(rs.getString(1));
-            nama.setText(rs.getString(2));
-            cicilan.setSelectedItem(rs.getString(3));
-            tgl.setDate (rs.getDate(4));
-            jmlhpendaftaran.setText(rs.getString(5));
-            ttotal.setText(rs.getString(6));
-            status.setText(rs.getString(7));
-            
-            }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"error : "+e.getMessage());
-        }
+        simpan.setEnabled(false);
+        int bar = tblpendaftaran.getSelectedRow();
+        String nis1 = tblpendaftaran.getValueAt(bar, 1).toString();
+        String nama1 = tblpendaftaran.getValueAt(bar, 2).toString();
+        String cicilan1 = tblpendaftaran.getValueAt(bar, 4).toString();
+        String jumlahString = tblpendaftaran.getValueAt(bar, 5).toString();
+        String totalString = tblpendaftaran.getValueAt(bar, 6).toString();
+        String status1 = tblpendaftaran.getValueAt(bar, 7).toString();
+        
+        Cicilan1 = Integer.parseInt(jumlahString);
+        totalInt = Integer.parseInt(totalString);
+        
+            nis.setText(nis1);
+            nama.setText(nama1);
+            cicilan.setSelectedItem(cicilan1);
+            jmlhpendaftaran.setText(jumlahString);
+            ttotal.setText(totalString);
+            status.setText(status1);
     }//GEN-LAST:event_tblpendaftaranMouseClicked
 
     private void jmlhpendaftaranKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmlhpendaftaranKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             total();
-            status ();
+            status();
         }
     }//GEN-LAST:event_jmlhpendaftaranKeyPressed
 
@@ -441,6 +455,21 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         new menuutama().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        try{
+           String sql = "update pendaftaran set total = '"+ttotal.getText()+"', status = '"+status.getText()+"' where nis = '"+nis.getText()+"'";
+                   
+            System.out.println(sql);
+            st = koneksi.con.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Data Telah di Ubah");
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null," Data Gagal Diubah "+e);
+        }
+        output();
+    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -508,5 +537,6 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     private javax.swing.JTextField status;
     public static javax.swing.JTable tblpendaftaran;
     private javax.swing.JTextField ttotal;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

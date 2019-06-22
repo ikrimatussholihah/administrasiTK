@@ -157,6 +157,7 @@ public class alatdanseragam extends javax.swing.JFrame {
     
     public void datatable(String cari_nama){
          DefaultTableModel tbl = new DefaultTableModel();
+         tbl.addColumn("No");
          tbl.addColumn("NIS");
          tbl.addColumn("Nama");
          tbl.addColumn("Jenis");
@@ -169,10 +170,11 @@ public class alatdanseragam extends javax.swing.JFrame {
          if (cari_nama.equals("")){
              try{
                  Statement st =(Statement)koneksi.con.createStatement();
-                 ResultSet res=st.executeQuery("select nis,nama,jenis,tanggal,keterangan,jumlah,total,status from alatdanseragam");
+                 ResultSet res=st.executeQuery("select id_pembayaran,nis,nama,jenis,tanggal,keterangan,jumlah,total,status from alatdanseragam");
                  while (res.next()){
                      tbl.addRow(new Object[]{ 
                       
+                         res.getString("id_pembayaran"),
                          res.getString("nis"),
                          res.getString("nama"),
                          res.getString("jenis"),
@@ -190,10 +192,11 @@ public class alatdanseragam extends javax.swing.JFrame {
          }else{
              try{
                  Statement st = (Statement)koneksi.con.createStatement();
-                 ResultSet res = st.executeQuery("select nis,nama,jenis,tanggal,keterangan,jumlah,total,status from alatdanseragam where nama Like '%"+cari_nama+"%'");
+                 ResultSet res = st.executeQuery("select id_pembayaran,nis,nama,jenis,tanggal,keterangan,jumlah,total,status from alatdanseragam where nama Like '%"+cari_nama+"%'");
                  
                  while(res.next()){
                      tbl.addRow(new Object[]{
+                         res.getString("id_pembayaran"),
                          res.getString("nis"),
                          res.getString("nama"),
                          res.getString("jenis"),
@@ -320,7 +323,7 @@ public class alatdanseragam extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblalatseragam);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 610, 106));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 700, 120));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -328,7 +331,7 @@ public class alatdanseragam extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 590, 68, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 590, 68, -1));
         jPanel1.add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 170, 30));
 
         jLabel8.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
@@ -397,7 +400,7 @@ public class alatdanseragam extends javax.swing.JFrame {
         jLabel2.setText("TK Islam Ruhama Bekasi");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 660));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 670));
 
         jLabel11.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel11.setText("NIS");
@@ -415,26 +418,22 @@ public class alatdanseragam extends javax.swing.JFrame {
 
     private void tblalatseragamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblalatseragamMouseClicked
         // TODO add your handling code here:
-        String AS = String.valueOf(alatdanseragam.tblalatseragam.getValueAt(alatdanseragam.tblalatseragam.getSelectedRow(),0));
-        System.out.println(AS);
-       // String sql = "SELECT id_pembayaran,nis,jenis,keterangan,jumlah,total,status FROM pembayaran WHERE nis ='"+AS+"'";
-       String sql = "SELECT * FROM alatdanseragam WHERE id_pembayaran ='"+ AS+"'"; 
-       try{
-            st = koneksi.con.createStatement();
-            rs = st.executeQuery(sql);
-            rs.next();
-            nisalat.setText(rs.getString(1));
-            nama.setText(rs.getString(2));
-            cbalatseragam.setSelectedItem(rs.getString(3));
-            cbsemester.setSelectedItem(rs.getString(5));
-            tgl.setDate (rs.getDate(4));
-            jumlah.setText(rs.getString(6));
-            ttotal.setText(rs.getString(7));
-            status.setText(rs.getString(8));
-            
-            }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"error : "+e.getMessage());
-        }
+       int bar = tblalatseragam.getSelectedRow();
+        String nis1 = tblalatseragam.getValueAt(bar, 1).toString();
+        String nama1 = tblalatseragam.getValueAt(bar, 2).toString();
+        String cicilan1 = tblalatseragam.getValueAt(bar, 3).toString();
+        String jumlah1 = tblalatseragam.getValueAt(bar, 5).toString();
+        String jumlah2 = tblalatseragam.getValueAt(bar, 6).toString();
+        String totalString = tblalatseragam.getValueAt(bar, 7).toString();
+        String status1 = tblalatseragam.getValueAt(bar, 8).toString();
+        
+            nisalat.setText(nis1);
+            nama.setText(nama1);
+            cbalatseragam.setSelectedItem(cicilan1);
+            cbsemester.setSelectedItem(jumlah1);
+            jumlah.setText(jumlah2);
+            ttotal.setText(totalString);
+            status.setText(status1);
     }//GEN-LAST:event_tblalatseragamMouseClicked
 
     private void jumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jumlahKeyPressed
