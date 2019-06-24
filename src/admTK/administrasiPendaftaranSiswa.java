@@ -244,13 +244,15 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblpendaftaran = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
         nis = new javax.swing.JTextField();
         nis2 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         update = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
@@ -291,7 +293,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         getContentPane().add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 230, 31));
 
         simpan.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        simpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save-icon-55391.png"))); // NOI18N
+        simpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/save-icon-55391.png"))); // NOI18N
         simpan.setText("save");
         simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,8 +320,6 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logotkkecilLL.png"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("NSimSun", 1, 24)); // NOI18N
         jLabel1.setText("Administrasi Pendaftaran Siswa");
@@ -379,14 +379,6 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblpendaftaran);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 665, 110));
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 540, 72, -1));
         getContentPane().add(nis, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 127, 230, 30));
         getContentPane().add(nis2, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 127, 230, 30));
 
@@ -402,13 +394,24 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
             }
         });
         getContentPane().add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 390, 210, 50));
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 110, 580, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
         jLabel6.setToolTipText("");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/background.jpg"))); // NOI18N
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 110, 560, -1));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/home (2).jpg"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 550, 50, 50));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/background.jpg"))); // NOI18N
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -450,12 +453,6 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmlhpendaftaranKeyPressed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        new menuutama().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         try{
            String sql = "update pendaftaran set total = '"+ttotal.getText()+"', status = '"+status.getText()+"' where nis = '"+nis.getText()+"'";
@@ -470,6 +467,12 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
         }
         output();
     }//GEN-LAST:event_updateActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new menuutama().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -511,13 +514,14 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cari_nama;
     private javax.swing.JComboBox<String> cicilan;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -525,6 +529,7 @@ public class administrasiPendaftaranSiswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

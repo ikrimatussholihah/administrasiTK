@@ -92,7 +92,7 @@ public class pembayaranSPP extends javax.swing.JFrame {
         jPanel1.add(jumlahspp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 208, 203, 30));
 
         btnsimpan.setFont(new java.awt.Font("Tekton Pro Cond", 1, 18)); // NOI18N
-        btnsimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save-icon-55391.png"))); // NOI18N
+        btnsimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/save-icon-55391.png"))); // NOI18N
         btnsimpan.setText("Save");
         btnsimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +101,7 @@ public class pembayaranSPP extends javax.swing.JFrame {
         });
         jPanel1.add(btnsimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 153, 48));
 
-        btnkembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ip_icon_02_back.png"))); // NOI18N
+        btnkembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/ip_icon_02_back.png"))); // NOI18N
         btnkembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnkembaliActionPerformed(evt);
@@ -117,7 +117,7 @@ public class pembayaranSPP extends javax.swing.JFrame {
         bulanbayarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July", "Agustus", "September", "Oktober", "November", "Desember" }));
         jPanel1.add(bulanbayarComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 94, 42));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/home (2).jpg"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -134,7 +134,7 @@ public class pembayaranSPP extends javax.swing.JFrame {
         jLabel7.setText("NIS");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 93, -1, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgroundlogo.jpg"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/backgroundlogo.jpg"))); // NOI18N
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 610, 380));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -51,6 +51,7 @@ public class menuutama extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Menudatamurid = new javax.swing.JMenuItem();
@@ -59,7 +60,6 @@ public class menuutama extends javax.swing.JFrame {
         spp = new javax.swing.JMenuItem();
         alatseragam = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        laporandatasiswa = new javax.swing.JMenuItem();
         laporanadm = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -68,28 +68,31 @@ public class menuutama extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MENU2.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/MENU2.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jLabel1)
+            .addComponent(jLabel2)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel2)
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bukuudata.png"))); // NOI18N
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/bukuudata.png"))); // NOI18N
         jMenu1.setText("Pendataan Siswa");
         jMenu1.setFont(new java.awt.Font("Lithos Pro Regular", 0, 12)); // NOI18N
 
         Menudatamurid.setFont(new java.awt.Font("Simplified Arabic Fixed", 1, 12)); // NOI18N
-        Menudatamurid.setIcon(new javax.swing.ImageIcon(getClass().getResource("/google-docs.png"))); // NOI18N
+        Menudatamurid.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/google-docs.png"))); // NOI18N
         Menudatamurid.setText("Pendataan siswa");
         Menudatamurid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,12 +103,12 @@ public class menuutama extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uang.jpg"))); // NOI18N
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/uang.jpg"))); // NOI18N
         jMenu4.setText("Administrasi");
         jMenu4.setFont(new java.awt.Font("Lithos Pro Regular", 0, 12)); // NOI18N
 
         pendaftaransiswa.setFont(new java.awt.Font("SimSun-ExtB", 1, 12)); // NOI18N
-        pendaftaransiswa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buku.jpg"))); // NOI18N
+        pendaftaransiswa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/buku.jpg"))); // NOI18N
         pendaftaransiswa.setText("Pendaftaran Siswa");
         pendaftaransiswa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +118,7 @@ public class menuutama extends javax.swing.JFrame {
         jMenu4.add(pendaftaransiswa);
 
         spp.setFont(new java.awt.Font("SimSun-ExtB", 1, 12)); // NOI18N
-        spp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/spp.jpg"))); // NOI18N
+        spp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/spp.jpg"))); // NOI18N
         spp.setText("SPP");
         spp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +128,7 @@ public class menuutama extends javax.swing.JFrame {
         jMenu4.add(spp);
 
         alatseragam.setFont(new java.awt.Font("SimSun-ExtB", 1, 12)); // NOI18N
-        alatseragam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alat dan seragam1.jpg"))); // NOI18N
+        alatseragam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/alat dan seragam1.jpg"))); // NOI18N
         alatseragam.setText("Alat dan seragam");
         alatseragam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,21 +139,13 @@ public class menuutama extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inscripcion.png"))); // NOI18N
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/inscripcion.png"))); // NOI18N
         jMenu2.setText("Laporan");
         jMenu2.setFont(new java.awt.Font("Lithos Pro Regular", 0, 12)); // NOI18N
 
-        laporandatasiswa.setFont(new java.awt.Font("SimSun-ExtB", 1, 12)); // NOI18N
-        laporandatasiswa.setText("Laporan Datasiswa");
-        laporandatasiswa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                laporandatasiswaActionPerformed(evt);
-            }
-        });
-        jMenu2.add(laporandatasiswa);
-
         laporanadm.setFont(new java.awt.Font("SimSun-ExtB", 1, 12)); // NOI18N
-        laporanadm.setText("Laporan Administrasi");
+        laporanadm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/inscripcion.png"))); // NOI18N
+        laporanadm.setText("Laporan");
         laporanadm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laporanadmActionPerformed(evt);
@@ -160,7 +155,7 @@ public class menuutama extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/remove.png"))); // NOI18N
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/remove.png"))); // NOI18N
         jMenu3.setText("Exit");
         jMenu3.setFont(new java.awt.Font("Lithos Pro Regular", 0, 12)); // NOI18N
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +164,7 @@ public class menuutama extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/remove.png"))); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/remove.png"))); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -185,21 +180,17 @@ public class menuutama extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void laporandatasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporandatasiswaActionPerformed
-        // TODO add your handling code here:
-        new cetakdatasiswa().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_laporandatasiswaActionPerformed
 
     private void laporanadmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanadmActionPerformed
         // TODO add your handling code here:
@@ -279,6 +270,7 @@ public class menuutama extends javax.swing.JFrame {
     private javax.swing.JMenuItem Menudatamurid;
     private javax.swing.JMenuItem alatseragam;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -287,7 +279,6 @@ public class menuutama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem laporanadm;
-    private javax.swing.JMenuItem laporandatasiswa;
     private javax.swing.JMenuItem pendaftaransiswa;
     private javax.swing.JMenuItem spp;
     // End of variables declaration//GEN-END:variables

@@ -298,12 +298,14 @@ public class pendataansiswa extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cbterima = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         cbthn = new javax.swing.JComboBox<>();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -401,7 +403,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 51));
 
         btnsave.setFont(new java.awt.Font("Prestige Elite Std", 1, 14)); // NOI18N
-        btnsave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save-icon-55391.png"))); // NOI18N
+        btnsave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/save-icon-55391.png"))); // NOI18N
         btnsave.setText("Simpan");
         btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,7 +412,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         });
 
         btnedit.setFont(new java.awt.Font("Tekton Pro", 1, 14)); // NOI18N
-        btnedit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/report_edit.png"))); // NOI18N
+        btnedit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/report_edit.png"))); // NOI18N
         btnedit.setText("ubah");
         btnedit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -419,7 +421,7 @@ public class pendataansiswa extends javax.swing.JFrame {
         });
 
         btnhapus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnhapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Delete.png"))); // NOI18N
+        btnhapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/Delete.png"))); // NOI18N
         btnhapus.setText("Hapus");
         btnhapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,7 +429,7 @@ public class pendataansiswa extends javax.swing.JFrame {
             }
         });
 
-        btnhome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
+        btnhome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/home (2).jpg"))); // NOI18N
         btnhome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnhomeActionPerformed(evt);
@@ -447,7 +449,7 @@ public class pendataansiswa extends javax.swing.JFrame {
                             .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 3, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
+                        .addGap(0, 3, Short.MAX_VALUE)
                         .addComponent(btnsave)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -480,15 +482,18 @@ public class pendataansiswa extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tekton Pro", 1, 18)); // NOI18N
         jLabel16.setText("Jalan Raya Hankam No.5 RT 006/009, Jati warna Pondok Melati Bekasi");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logotkkecilLL.png"))); // NOI18N
         jLabel1.setToolTipText("");
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/logotkkecilLL.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(193, 193, 193)
+                .addGap(162, 162, 162)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(57, 57, 57)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,25 +501,25 @@ public class pendataansiswa extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(119, 119, 119)
                         .addComponent(jLabel9)))
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel16))
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, -1));
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
         jLabel17.setToolTipText("");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 690, 450));
 
@@ -529,13 +534,14 @@ public class pendataansiswa extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Simplified Arabic Fixed", 1, 18)); // NOI18N
         jLabel18.setText("Tahun Ajaran");
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgroundlogo.jpg"))); // NOI18N
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 670, -1));
 
         cbthn.setFont(new java.awt.Font("Yu Gothic Light", 1, 14)); // NOI18N
         cbthn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014/2015", "2015/2016", "2016/2017", "2017/2018", "2018/2019", "2019/2020", "2020/2021", "2021/2022", "2022/2023", "2023/2024", "2024/2025" }));
         jPanel1.add(cbthn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 350, -1, -1));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/backgroundlogo.jpg"))); // NOI18N
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 80, 580, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -679,7 +685,9 @@ public class pendataansiswa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

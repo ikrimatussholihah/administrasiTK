@@ -175,6 +175,8 @@ tblsppp.setModel(tabmode);
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btntambah = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,26 +206,25 @@ tblsppp.setModel(tabmode);
         });
         jPanel1.add(cari_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 92, 228, -1));
 
-        btnhome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
+        btnhome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/home (2).jpg"))); // NOI18N
         btnhome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnhomeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnhome, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 59, -1));
+        jPanel1.add(btnhome, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 50, 50));
 
         jLabel1.setFont(new java.awt.Font("Tekton Pro Cond", 1, 36)); // NOI18N
         jLabel1.setText("Data SPP");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 51));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tamanbermaintk.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 50, 770, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 51));
 
         btntambah.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        btntambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tambah.png"))); // NOI18N
+        btntambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/note-add.png"))); // NOI18N
         btntambah.setText("Tambah");
         btntambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +239,7 @@ tblsppp.setModel(tabmode);
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(btntambah)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,6 +251,12 @@ tblsppp.setModel(tabmode);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 370, 150, 90));
 
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/tamanbermaintk.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 40, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,7 +265,7 @@ tblsppp.setModel(tabmode);
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, Short.MAX_VALUE)
         );
 
         pack();
@@ -323,6 +330,8 @@ tblsppp.setModel(tabmode);
     public static javax.swing.JTextField cari_nama;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

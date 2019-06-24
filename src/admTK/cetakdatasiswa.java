@@ -5,6 +5,21 @@
  */
 package admTK;
 
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 
 
 /**
@@ -37,9 +52,10 @@ public class cetakdatasiswa extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         home = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tahunajaran = new javax.swing.JComboBox<>();
         back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,8 +65,13 @@ public class cetakdatasiswa extends javax.swing.JFrame {
 
         cetakdatasiswa.setBackground(new java.awt.Color(204, 204, 255));
         cetakdatasiswa.setFont(new java.awt.Font("Prestige Elite Std", 1, 14)); // NOI18N
-        cetakdatasiswa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cetak22.png"))); // NOI18N
+        cetakdatasiswa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/cetak22.png"))); // NOI18N
         cetakdatasiswa.setText("Cetak");
+        cetakdatasiswa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cetakdatasiswaActionPerformed(evt);
+            }
+        });
         jPanel1.add(cetakdatasiswa, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 320, -1));
 
         jLabel4.setFont(new java.awt.Font("Trajan Pro", 1, 14)); // NOI18N
@@ -62,45 +83,52 @@ public class cetakdatasiswa extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Sakkal Majalla", 1, 36)); // NOI18N
         jLabel1.setText("TK Islam Ruhama Bekasi");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logotkkecilLL.png"))); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Sakkal Majalla", 1, 36)); // NOI18N
         jLabel2.setText("Cetak Laporan Pendataan Siswa");
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/logotkkecilLL.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGap(55, 55, 55)
                         .addComponent(jLabel1)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 90));
 
-        home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home (2).jpg"))); // NOI18N
+        home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/home (2).jpg"))); // NOI18N
         home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeActionPerformed(evt);
@@ -112,12 +140,12 @@ public class cetakdatasiswa extends javax.swing.JFrame {
         jLabel5.setText("Laporan Pendataan siswa");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, 20));
 
-        jComboBox1.setBackground(new java.awt.Color(204, 204, 255));
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "....", "2015/2016", "2016/2017", "2017/2018", "2018/2019", "2019/2020", "2020/2021", "2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", " " }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 90, 40));
+        tahunajaran.setBackground(new java.awt.Color(204, 204, 255));
+        tahunajaran.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        tahunajaran.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "....", "2014/2015", "2015/2016", "2016/2017", "2017/2018", "2018/2019", "2019/2020", "2020/2021", "2021/2022", "2022/2023", "2023/2024", "2024/2025", "2025/2026", " " }));
+        jPanel1.add(tahunajaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 100, 40));
 
-        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ip_icon_02_back.png"))); // NOI18N
+        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar icon/ip_icon_02_back.png"))); // NOI18N
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
@@ -150,6 +178,28 @@ public class cetakdatasiswa extends javax.swing.JFrame {
         new cetakadm().setVisible(true);
         dispose(); 
     }//GEN-LAST:event_backActionPerformed
+
+    private void cetakdatasiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakdatasiswaActionPerformed
+        // TODO add your handling code here:
+        System.out.println(tahunajaran.getSelectedItem());
+        Map<String, Object> param = new HashMap<>();
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/administrasi", "root", "1010");
+            
+            param.put("tahunajaranjasper", tahunajaran.getSelectedItem());
+            File file = new File("src/laporan/LaporanDataSiswa.jrxml");
+            JasperDesign jasperDesign = JRXmlLoader.load(file);
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param,con);
+            JasperViewer.viewReport(jasperPrint,false);
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Data tidak dapat dicetak !",
+            "Cetak Data", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cetakdatasiswaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,13 +240,14 @@ public class cetakdatasiswa extends javax.swing.JFrame {
     private javax.swing.JButton back;
     private javax.swing.JButton cetakdatasiswa;
     private javax.swing.JButton home;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JComboBox<String> tahunajaran;
     // End of variables declaration//GEN-END:variables
 }
